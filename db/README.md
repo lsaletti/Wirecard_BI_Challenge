@@ -2,7 +2,7 @@
 
 ### *Postgres*
 
-
+![DER](https://user-images.githubusercontent.com/28897059/76761041-72013780-676d-11ea-81c8-3ed5dbcd0010.PNG)
 
 ## Gerando o DER do banco de dados
 
