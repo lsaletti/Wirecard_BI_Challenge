@@ -15,6 +15,11 @@ O Projeto tem como objetivo disponibilizar os dados após um breve tratamento e 
 │   │   │   ├── src
 │   │   │   |     ├── create_table.sql 
 │   │   │   ├── Dockerfile
+│   │   │   ├── der
+│   │   │   ├── generate_der.sh
+│   │   │   ├── postgresql-42.1.1.jar
+│   │   │   ├── schemaSpy_5.0.0
+│   │   │   ├── README.md
 │   ├── etl
 │   │   ├── python
 │   │   │   ├── commands.sh

@@ -29,22 +29,6 @@ services:
       ip_fixed:
           ipv4_address: 128.0.0.3
 
-  wirecard-etl:
-    image: wirecard-etl
-    container_name: wirecard-etl
-    ports:
-      - "9090:9090"
-    depends_on:
-      - wirecard-db
-    volumes:
-      - ${PWD}/src/data/:/src/
-      - ${PWD}/src/service/:/service/
-    links: 
-      - wirecard-db:wirecard-db
-    networks:
-      ip_fixed:
-          ipv4_address: 128.0.0.3
-
   wirecard-api:
     image: wirecard-api
     container_name: wirecard-api
@@ -59,6 +43,22 @@ services:
       ip_fixed:
           ipv4_address: 128.0.0.4
 
+  pgadmin:
+    image: fenglc/pgadmin4
+    container_name: wirecard-pgadmin
+    ports:
+      - "5050:5050"
+    environment:
+        PGADMIN_DEFAULT_EMAIL: "user@domain.com"
+        PGADMIN_DEFAULT_PASSWORD: "SuperSecret"
+    volumes:
+      - ${PWD}/pgadmin/pgadmin4.db:/var/lib/pgadmin/pgadmin4.db
+    links: 
+      - wirecard-db:wirecard-db
+    networks:
+      ip_fixed:
+          ipv4_address: 128.0.0.5
+
 networks:
   ip_fixed:
     driver: bridge
@@ -66,19 +66,3 @@ networks:
       config:
         - subnet: 128.0.0.0/16
           gateway: 128.0.0.1
-  # pgadmin:
-  #   image: fenglc/pgadmin4
-  #   container_name: wirecard-pgadmin
-  #   ports:
-  #     - "5050:5050"
-  #   environment:
-  #       PGADMIN_DEFAULT_EMAIL: "user@domain.com"
-  #       PGADMIN_DEFAULT_PASSWORD: "SuperSecret"
-  #   volumes:
-  #     - ${PWD}/pgadmin/pgadmin4.db:/var/lib/pgadmin/pgadmin4.db
-  #   links: 
-  #     - wirecard-db:wirecard-db
-  #   networks:
-  #     ip_fixed:
-  #         ipv4_address: 128.0.0.5
-

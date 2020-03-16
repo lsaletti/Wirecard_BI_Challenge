@@ -5,7 +5,7 @@ down:
 	docker-compose -f docker-compose.yml down
 
 build:
-	docker build -t wirecard-db ${PWD}/db/postgres/.
+	docker build -t wirecard-db  ${PWD}/db/postgres/.
 	docker build -t wirecard-etl ${PWD}/etl/python/.
 	docker build -t wirecard-api ${PWD}/api/app/.
 
