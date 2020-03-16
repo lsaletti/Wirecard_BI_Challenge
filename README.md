@@ -26,12 +26,6 @@ O Projeto tem como objetivo disponibilizar os dados após um breve tratamento e 
 │   │   │   ├── Dockerfile
 │   │   │   ├── Service
 │   │   │   │     ├── requirements.txt
-│   │   │   │     ├── etl_brand.py
-│   │   │   |     ├── etl_payment_status.py
-│   │   │   |     ├── etl_payment.py
-│   │   │   |     ├── etl_returned_code.py
-│   │   │   |     ├── etl_acquirer_responses.py
-│   │   │   |     ├── etl_acquirers.py
 │   ├── notebooks
 │   │   ├── analise_exploratoria.ipynb
 │   ├── pgadmin
@@ -40,18 +34,20 @@ O Projeto tem como objetivo disponibilizar os dados após um breve tratamento e 
 ├── src
 │   ├── data
 │   │   ├── raw
-│   │   │   ├── clientes.csv
-│   │   ├── processed
-│   │   │   ├──artigo_recomendados_por_similaridade.csv
-│   │   │   ├──artigos_recomendados_por_popularidade.csv
-│   │   ├── create_table.sql
-|   ├── service
-│   │   ├── etl_brand.py
-│   │   ├── etl_payment_status.py
-│   │   ├── etl_payment.py
-│   │   ├── etl_returned_code.py
-│   │   ├── etl_acquirer_responses.py
-│   │   ├── etl_acquirers.py
+│   │   │   ├── brand.csv
+│   │   │   ├── payment_status.csv
+│   │   │   ├── payment.csv
+│   │   │   ├── returned_code.csv
+│   │   │   ├── acquirer_responses.csv
+│   │   │   ├── acquirers.csv
+│   ├── processed
+│   ├── service
+│   │   │   ├── etl_brand.py
+│   │   │   ├── etl_payment_status.py
+│   │   │   ├── etl_payment.py
+│   │   │   ├── etl_returned_code.py
+│   │   │   ├── etl_acquirer_responses.py
+│   │   │   ├── etl_acquirers.py
 ├── Makefile
 ├── README.md
 ├── SOLUTION.md
@@ -64,7 +60,7 @@ O Projeto tem como objetivo disponibilizar os dados após um breve tratamento e 
 
 #### Arquitetura utilizada: 
 
-![arquitetura](https://user-images.githubusercontent.com/28897059/65170634-7e574280-da1f-11e9-80d9-19fd761d7c3f.png)
+![Capturar](https://user-images.githubusercontent.com/28897059/76781160-09c24e00-678d-11ea-8b1c-13f8baebb415.PNG)
 
 
 
@@ -72,13 +68,13 @@ O Projeto tem como objetivo disponibilizar os dados após um breve tratamento e 
 
 
 #### Inicialização
-Comandos para realizar o Build das imagens que serão utilizados.
+Comando para realizar o Build das imagens que serão utilizados.
 
 ```bash
 make build
 ```
 
-Comandos para rodar os serviços que serão utilizados.
+Comando para rodar os serviços que serão utilizados.
 
 ```bash
 make run
