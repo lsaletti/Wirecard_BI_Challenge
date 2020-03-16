@@ -86,7 +86,9 @@ make jupyter
 ```
 ***Password:*** 
 
-`bigdatageo123`
+```bash
+bigdatageo123
+```
 
 
 ----------
