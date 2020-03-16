@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<database name="postgres" schema="wirecard" type="PostgreSQL - 12.1 (Debian 12.1-1.pgdg100+1)">
+   <tables>
+      <table name="acquirer_efficiency" numRows="0" remarks="" schema="wirecard" type="VIEW">
+         <column autoUpdated="false" digits="0" id="0" name="acquirer" nullable="true" remarks="" size="45" type="varchar"/>
+         <column autoUpdated="false" digits="17" id="1" name="payment_value_total" nullable="true" remarks="" size="17" type="float8"/>
+         <column autoUpdated="false" digits="17" id="2" name="payment_fee_total" nullable="true" remarks="" size="17" type="float8"/>
+         <column autoUpdated="false" digits="17" id="3" name="amount" nullable="true" remarks="" size="17" type="float8"/>
+      </table>
+      <table name="acquirer_responses" numRows="6675" remarks="" schema="wirecard" type="TABLE">
+         <column autoUpdated="false" digits="0" id="0" name="acquirer_responses_id" nullable="false" remarks="" size="131089" type="numeric"/>
+         <column autoUpdated="false" digits="0" id="1" name="payment_id" nullable="false" remarks="" size="131089" type="numeric">
+            <parent column="payment_id" foreignKey="acquirer_responses_payment_id_fkey" implied="false" onDeleteCascade="false" table="payment"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="2" name="acquirer_id" nullable="false" remarks="" size="131089" type="numeric">
+            <parent column="acquirer_id" foreignKey="acquirer_responses_acquirer_id_fkey" implied="false" onDeleteCascade="false" table="acquirers"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="3" name="brand_id" nullable="false" remarks="" size="131089" type="numeric">
+            <parent column="brand_id" foreignKey="acquirer_responses_brand_id_fkey" implied="false" onDeleteCascade="false" table="brand"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="4" name="acquirer_transaction_id" nullable="false" remarks="" size="131089" type="numeric"/>
+         <column autoUpdated="false" digits="0" id="5" name="returned_code_id" nullable="false" remarks="" size="131089" type="numeric">
+            <parent column="returned_code_id" foreignKey="Implied Constraint" implied="true" onDeleteCascade="false" table="returned_code"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="6" name="transaction_datetime" nullable="true" remarks="" size="500" type="varchar"/>
+         <column autoUpdated="false" digits="17" id="7" name="amount" nullable="true" remarks="" size="17" type="float8"/>
+         <primaryKey column="acquirer_responses_id" sequenceNumberInPK="1"/>
+         <primaryKey column="returned_code_id" sequenceNumberInPK="2"/>
+         <index name="acquirer_responses_id" unique="true">
+            <column ascending="true" name="acquirer_responses_id"/>
+            <column ascending="true" name="returned_code_id"/>
+         </index>
+      </table>
+      <table name="acquirers" numRows="4" remarks="" schema="wirecard" type="TABLE">
+         <column autoUpdated="false" digits="0" id="0" name="acquirer_id" nullable="false" remarks="" size="131089" type="numeric">
+            <child column="acquirer_id" foreignKey="acquirer_responses_acquirer_id_fkey" implied="false" onDeleteCascade="false" table="acquirer_responses"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="1" name="acquirer" nullable="true" remarks="" size="45" type="varchar"/>
+         <primaryKey column="acquirer_id" sequenceNumberInPK="1"/>
+         <index name="acquirer_id" unique="true">
+            <column ascending="true" name="acquirer_id"/>
+         </index>
+      </table>
+      <table name="brand" numRows="6" remarks="" schema="wirecard" type="TABLE">
+         <column autoUpdated="false" digits="0" id="0" name="brand_id" nullable="false" remarks="" size="131089" type="numeric">
+            <child column="brand_id" foreignKey="acquirer_responses_brand_id_fkey" implied="false" onDeleteCascade="false" table="acquirer_responses"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="1" name="brand" nullable="true" remarks="" size="500" type="varchar"/>
+         <primaryKey column="brand_id" sequenceNumberInPK="1"/>
+         <index name="brand_id" unique="true">
+            <column ascending="true" name="brand_id"/>
+         </index>
+      </table>
+      <table name="overall_conversion_rate" numRows="0" remarks="" schema="wirecard" type="VIEW">
+         <column autoUpdated="false" digits="17" id="0" name="overall_conversion_rate" nullable="true" remarks="" size="17" type="float8"/>
+      </table>
+      <table name="payment" numRows="5256" remarks="" schema="wirecard" type="TABLE">
+         <column autoUpdated="false" digits="0" id="0" name="payment_id" nullable="false" remarks="" size="131089" type="numeric">
+            <child column="payment_id" foreignKey="acquirer_responses_payment_id_fkey" implied="false" onDeleteCascade="false" table="acquirer_responses"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="1" name="payment_form" nullable="false" remarks="" size="131089" type="numeric"/>
+         <column autoUpdated="false" digits="17" id="2" name="payment_value" nullable="true" remarks="" size="17" type="float8"/>
+         <column autoUpdated="false" digits="17" id="3" name="payment_fee" nullable="true" remarks="" size="17" type="float8"/>
+         <column autoUpdated="false" digits="0" id="4" name="payment_status" nullable="true" remarks="" size="1" type="numeric"/>
+         <column autoUpdated="false" digits="0" id="5" name="created_date" nullable="true" remarks="" size="500" type="varchar"/>
+         <primaryKey column="payment_id" sequenceNumberInPK="1"/>
+         <index name="payment_id" unique="true">
+            <column ascending="true" name="payment_id"/>
+         </index>
+      </table>
+      <table name="payment_status" numRows="11" remarks="" schema="wirecard" type="TABLE">
+         <column autoUpdated="false" digits="0" id="0" name="payment_status_id" nullable="false" remarks="" size="131089" type="numeric"/>
+         <column autoUpdated="false" digits="0" id="1" name="description" nullable="true" remarks="" size="45" type="varchar"/>
+         <primaryKey column="payment_status_id" sequenceNumberInPK="1"/>
+         <index name="payment_status_id" unique="true">
+            <column ascending="true" name="payment_status_id"/>
+         </index>
+      </table>
+      <table name="returned_code" numRows="15" remarks="" schema="wirecard" type="TABLE">
+         <column autoUpdated="false" digits="0" id="0" name="returned_code_id" nullable="false" remarks="" size="131089" type="numeric">
+            <child column="returned_code_id" foreignKey="Implied Constraint" implied="true" onDeleteCascade="false" table="acquirer_responses"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="1" name="returned_code" nullable="true" remarks="" size="45" type="varchar"/>
+         <column autoUpdated="false" digits="0" id="2" name="message" nullable="true" remarks="" size="500" type="varchar"/>
+         <primaryKey column="returned_code_id" sequenceNumberInPK="1"/>
+         <index name="returned_code_id" unique="true">
+            <column ascending="true" name="returned_code_id"/>
+         </index>
+      </table>
+      <table name="tpv" numRows="0" remarks="" schema="wirecard" type="VIEW">
+         <column autoUpdated="false" digits="17" id="0" name="tpv" nullable="true" remarks="" size="17" type="float8"/>
+         <column autoUpdated="false" digits="0" id="1" name="tpv_count" nullable="true" remarks="" size="19" type="int8"/>
+      </table>
+   </tables>
+</database>
