@@ -79,6 +79,12 @@ Comando para rodar os serviços que serão utilizados.
 ```bash
 make run
 ```
+Comando para derrubar os serviços que serão utilizados.
+
+```bash
+make down
+```
+
 Jupyter para visualizar analise exploratoria dos dados.
 
 ```bash
