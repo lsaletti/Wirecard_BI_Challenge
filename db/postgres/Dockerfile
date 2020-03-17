@@ -3,6 +3,8 @@ FROM postgres
 WORKDIR src
 ADD src/ /src/
 
+env POSTGRES_HOST_AUTH_METHOD=trust
+
 # RUN  apt-get update  \
 #         && apt-get install python3 -y \
 #         &&  apt install python3-pip -y \
